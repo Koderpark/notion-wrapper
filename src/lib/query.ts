@@ -1,15 +1,26 @@
+import { Column } from "../types/Column";
+import query from "../types/type-query";
+import { Title } from "../types/Title";
+import result from "../types/type-result";
+
 const { Client } = require("@notionhq/client");
 
-async function Query(db: string, auth: string): Promise<any> {
-  const notion = new Client(auth);
+async function QueryDB(db: string, auth: string): Promise<query> {
+  const notion = new Client({ auth: auth });
   return await notion.databases.query({
     database_id: db,
   });
 }
 
-async function Test(val: any): Promise<any> {
-  console.log(val["results"]);
-  return val["results"];
+async function GetResults(val: query): Promise<Array<result>> {
+  return val.results;
 }
 
-export { Query, Test };
+async function GetProps(val: result): any {
+  const ret = Object.entries(val.properties).map(([key, value]) => {
+    console.log(key);
+    console.log(value);
+  });
+}
+
+export { QueryDB, GetResults, GetProps };

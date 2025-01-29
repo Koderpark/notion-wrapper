@@ -1,15 +1,22 @@
 import { expect, it } from "vitest";
-import { Query, Test } from "./query";
+import { GetResults, QueryDB, GetProps } from "./query";
 
-it("should response raw database", async () => {
-  const result = await Query(process.env.MEMBERDB!, process.env.NOTION!);
-  console.log(result);
+const { VITE_NOTION, VITE_MEMBERDB } = import.meta.env;
+
+it("chk QueryDB", async () => {
+  const query = await QueryDB(VITE_MEMBERDB, VITE_NOTION);
+  expect(query).toBeDefined();
+});
+
+it("chk GetResults", async () => {
+  const query = await QueryDB(VITE_MEMBERDB, VITE_NOTION);
+  const result = await GetResults(query);
   expect(result).toBeDefined();
 });
 
-it("test2", async () => {
-  const result = await Query(process.env.MEMBERDB!, process.env.NOTION!);
-  const tmp = await Test(result);
-  console.log(tmp);
-  expect(tmp).toBeDefined();
+it("chk GetProps", async () => {
+  const query = await QueryDB(VITE_MEMBERDB, VITE_NOTION);
+  const result = await GetResults(query);
+  const prop = await result.map((it) => GetProps(it));
+  expect(prop).toBeDefined();
 });
