@@ -1,6 +1,4 @@
-import { Column } from "../types/Column";
 import query from "../types/type-query";
-import { Title } from "../types/Title";
 import result from "../types/type-result";
 
 const { Client } = require("@notionhq/client");
@@ -16,11 +14,12 @@ async function GetResults(val: query): Promise<Array<result>> {
   return val.results;
 }
 
-async function GetProps(val: result): any {
+async function GetProps(val: result): Promise<any> {
   const ret = Object.entries(val.properties).map(([key, value]) => {
-    console.log(key);
-    console.log(value);
+    // console.log(key);
+    // console.log(value);
   });
+  return ret;
 }
 
 export { QueryDB, GetResults, GetProps };

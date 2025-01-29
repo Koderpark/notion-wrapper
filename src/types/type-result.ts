@@ -1,3 +1,6 @@
+import { rich_text } from "./properties/rich_text";
+import { title } from "./properties/Title";
+
 export default interface result {
   object: string;
   id: string;
@@ -10,7 +13,7 @@ export default interface result {
   parent: parent;
   archived: boolean;
   in_trash: boolean;
-  properties: any;
+  properties: Map<string, title | rich_text>;
   url: string;
   public_url: string | null;
 }

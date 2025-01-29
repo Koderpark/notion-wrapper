@@ -11,6 +11,7 @@ it("chk QueryDB", async () => {
 it("chk GetResults", async () => {
   const query = await QueryDB(VITE_MEMBERDB, VITE_NOTION);
   const result = await GetResults(query);
+  console.log(result);
   expect(result).toBeDefined();
 });
 

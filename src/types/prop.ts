@@ -1,15 +1,15 @@
-type Column = {
+interface prop {
   id: string;
   type: string;
-};
+}
 
-type Annotations = {
+interface annotations {
   bold: boolean;
   italic: boolean;
   strikethrough: boolean;
   underline: boolean;
   code: boolean;
   color: string;
-};
+}
 
-export type { Column, Annotations };
+export type { prop, annotations };
