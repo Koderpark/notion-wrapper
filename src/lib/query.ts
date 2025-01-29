@@ -1,16 +1,28 @@
+import {
+  DatabaseObjectResponse,
+  ListDatabasesResponse,
+  QueryDatabaseResponse,
+} from "@notionhq/client/build/src/api-endpoints";
 import query from "../types/type-query";
 import result from "../types/type-result";
 
 const { Client } = require("@notionhq/client");
 
-async function QueryDB(db: string, auth: string): Promise<query> {
+async function QueryDB(
+  db: string,
+  auth: string
+): Promise<QueryDatabaseResponse> {
   const notion = new Client({ auth: auth });
-  return await notion.databases.query({
+  const val = await notion.databases.query({
     database_id: db,
   });
+
+  return val;
 }
 
-async function GetResults(val: query): Promise<Array<result>> {
+async function GetResults(
+  val: QueryDatabaseResponse
+): Promise<DatabaseObjectResponse[]> {
   return val.results;
 }
 
