@@ -20,7 +20,7 @@ function isTitle(input: prop): input is title {
   return input.type === "title";
 }
 
-function ParseProp<T extends title | rich_text>(key: string, value: T): T {
+function ParseProp<T extends prop>(key: string, value: T): T {
   // console.log(value);
 
   if (isTitle(value)) console.log(value.title);

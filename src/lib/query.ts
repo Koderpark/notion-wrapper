@@ -14,12 +14,4 @@ async function GetResults(val: query): Promise<Array<result>> {
   return val.results;
 }
 
-async function GetProps(val: result): Promise<any> {
-  const ret = Object.entries(val.properties).map(([key, value]) => {
-    // console.log(key);
-    // console.log(value);
-  });
-  return ret;
-}
-
-export { QueryDB, GetResults, GetProps };
+export { QueryDB, GetResults };
