@@ -19,11 +19,11 @@ export async function getPageList(
 
 export async function rangeProp<T>(
   input: PageObjectResponse,
-  callback: (value: prop) => Promise<T>
+  callback: (key: string, value: prop) => Promise<T>
 ): Promise<T[]> {
   const ret: T[] = [];
   for (const [key, value] of Object.entries(input.properties)) {
-    ret.push(await callback(value));
+    ret.push(await callback(key, value));
   }
   return ret;
 }
