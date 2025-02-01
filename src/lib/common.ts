@@ -3,8 +3,7 @@ import {
   QueryDatabaseResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 import { isFullPage } from "@notionhq/client";
-import { prop } from "../types/properties";
-
+import { Prop } from "../types/properties";
 export async function getPageList(
   input: QueryDatabaseResponse
 ): Promise<PageObjectResponse[]> {
@@ -19,7 +18,7 @@ export async function getPageList(
 
 export async function rangeProp<T>(
   input: PageObjectResponse,
-  callback: (key: string, value: prop) => Promise<T>
+  callback: (key: string, value: Prop) => Promise<T>
 ): Promise<T[]> {
   const ret: T[] = [];
   for (const [key, value] of Object.entries(input.properties)) {

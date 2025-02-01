@@ -1,14 +1,14 @@
-import { prop, title, rich_text, checkbox } from "../types/properties";
+import { Prop, Title, RichText, Checkbox } from "../types/properties";
 
-function isTitle(input: prop): input is title {
+function isTitle(input: Prop): input is Title {
   return input.type === "title";
 }
 
-function isRichText(input: prop): input is rich_text {
+function isRichText(input: Prop): input is RichText {
   return input.type === "rich_text";
 }
 
-function isCheckbox(input: prop): input is checkbox {
+function isCheckbox(input: Prop): input is Checkbox {
   return input.type === "checkbox";
 }
 

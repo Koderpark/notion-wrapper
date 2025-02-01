@@ -3,160 +3,111 @@ import {
   RichTextItemResponse,
   UserObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
+import { SubSelect, SubFile, SubDate } from "./subprop";
 
-export interface prop {
+export interface Prop {
   id: string;
   type: string;
 }
 
-export interface file {
-  name: string;
-  type: "file" | "external";
-  file?: {
-    url: string;
-    expiry_time: string;
-  };
-  external?: {
-    url: string;
-  };
-}
-
-type color =
-  | "default"
-  | "gray"
-  | "brown"
-  | "orange"
-  | "yellow"
-  | "green"
-  | "blue"
-  | "purple"
-  | "pink"
-  | "red";
-
-export interface select {
-  id: string;
-  name: string;
-  color: color;
-}
-
-export interface Checkbox extends prop {
+export interface Checkbox extends Prop {
   checkbox: boolean;
 }
 
-export interface CreatedBy extends prop {
+export interface CreatedBy extends Prop {
   created_by: PartialUserObjectResponse | UserObjectResponse;
 }
 
-export interface CreatedTime extends prop {
+export interface CreatedTime extends Prop {
   created_time: string;
 }
 
-export interface Date extends prop {
-  date: {
-    start?: string;
-    end?: string;
-  };
+export interface Date extends Prop {
+  date: SubDate;
 }
 
-export interface Email extends prop {
+export interface Email extends Prop {
   email: string;
 }
 
-export interface Files extends prop {
-  files: Array<file>;
+export interface Files extends Prop {
+  files: Array<SubFile>;
 }
 
-export interface Formula extends prop {
+export interface Formula extends Prop {
   formula: {
     type: "boolean" | "date" | "number" | "string";
     number?: number;
     string?: string;
     boolean?: boolean;
-    date?: {
-      start?: string;
-      end?: string;
-    };
+    date?: SubDate;
   };
 }
 
-export interface Icon extends prop {
+export interface Icon extends Prop {
   icon: {
     type: "emoji" | "file";
     emoji?: string;
-    file?: file;
+    file?: SubFile;
   };
 }
 
-export interface LastEditedBy extends prop {
+export interface LastEditedBy extends Prop {
   last_edited_by: PartialUserObjectResponse | UserObjectResponse;
 }
 
-export interface LastEditedTime extends prop {
+export interface LastEditedTime extends Prop {
   last_edited_time: string;
 }
 
-export interface MultiSelect extends prop {
-  multi_select: Array<select>;
+export interface MultiSelect extends Prop {
+  multi_select: Array<SubSelect>;
 }
 
-export interface Number extends prop {
+export interface Number extends Prop {
   number: number;
 }
 
-export interface People extends prop {
+export interface People extends Prop {
   people: Array<PartialUserObjectResponse | UserObjectResponse>;
 }
 
-export interface PhoneNumber extends prop {
+export interface PhoneNumber extends Prop {
   phone_number: string;
 }
 
-// export interface Relation extends prop {
-//   relation: Array<{ id: string }>;
-//   has_more: boolean;
-// }
+// Todo: Relation extends Prop {
 
-// export interface Rollup extends prop {
-//   rollup: {
-//     type: "array" | "date" | "incomplete" | "number" | "unsupported";
-//     array?: Array<string>;
-//     date?: {
-//       start?: string;
-//       end?: string;
-//     };
-//     number?: number;
-//     select?: select;
-//   };
-// }
+// Todo Rollup extends Prop {
 
-export interface RichText extends prop {
+export interface RichText extends Prop {
   rich_text: Array<RichTextItemResponse>;
 }
 
-export interface Select extends prop {
-  select: select;
+export interface Select extends Prop {
+  select: SubSelect;
 }
 
-export interface Status extends prop {
-  status: select;
+export interface Status extends Prop {
+  status: SubSelect;
 }
 
-export interface Title extends prop {
+export interface Title extends Prop {
   title: Array<RichTextItemResponse>;
 }
 
-export interface Url extends prop {
+export interface Url extends Prop {
   url: string;
 }
 
-export interface UniqueId extends prop {
+export interface UniqueId extends Prop {
   unique_id: string;
 }
 
-export interface Verification extends prop {
+export interface Verification extends Prop {
   verification: {
     state: "verified" | "unverified";
     verified_by: PartialUserObjectResponse | UserObjectResponse;
-    // date: date;
+    date: SubDate;
   };
 }
