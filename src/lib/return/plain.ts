@@ -1,7 +1,7 @@
 import { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 import { RichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
 import { prop } from "../../types/properties";
-import { isTitle, isRichText, isCheckbox } from "../narrowing";
+import * as chk from "../narrowing";
 import { getPageList } from "../common";
 import { rangeProp } from "../common";
 
@@ -20,17 +20,11 @@ export async function makePlain(input: QueryDatabaseResponse) {
 }
 
 export async function narrowing(input: prop) {
-  if (isTitle(input)) {
-    return mergeRichText(input.title);
-  }
-  if (isRichText(input)) {
-    return mergeRichText(input.rich_text);
-  }
-  if (isCheckbox(input)) {
-    return input.checkbox;
-  }
+  if (chk.isTitle(input)) return mergeText(input.title);
+  if (chk.isRichText(input)) return mergeText(input.rich_text);
+  if (chk.isCheckbox(input)) return input.checkbox;
 }
 
-function mergeRichText(input: RichTextItemResponse[]): string {
+function mergeText(input: RichTextItemResponse[]): string {
   return input.map((it) => it.plain_text).join("");
 }

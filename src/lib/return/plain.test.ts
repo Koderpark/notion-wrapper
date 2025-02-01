@@ -1,6 +1,5 @@
 import { it, expect } from "vitest";
 import { NotionWrapper } from "../notion";
-import { getPageList } from "../common";
 import { makePlain } from "./plain";
 
 const notion = new NotionWrapper(
